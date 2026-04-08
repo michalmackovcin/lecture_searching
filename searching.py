@@ -78,6 +78,41 @@ def main():
 if __name__ == "__main__":
     main()
 
+def binary_search(list,chcené):
+    lavy=0
+    pravy=len(list)
+    while lavy <= pravy:
+        stred=(lavy+pravy)//2
+
+        if list[stred]==chcené:
+            return stred
+        elif list[stred] < chcené:
+            lavy=stred+1
+        else:
+            pravy=stred-1
+    return None
+def main():
+    # načítanie zoradeného zoznamu zo súboru
+    ordered_data = read_data("sequential.json", "ordered_numbers")
+
+    # číslo, ktoré chceme nájsť
+    hladane_cislo = 70
+
+    # zavolanie binárneho vyhľadávania
+    index = binary_search(ordered_data, hladane_cislo)
+
+    # výpis výsledku
+    if index is not None:
+        print(f"Hľadané číslo {hladane_cislo} je na indexe: {index}")
+    else:
+        print(f"Hľadané číslo {hladane_cislo} sa v zozname nenachádza.")
+
+# spustenie programu
+if __name__ == "__main__":
+    main()
+
+
+
 
 
 
