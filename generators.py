@@ -54,7 +54,7 @@ if __name__ == "__main__":
     main()
 import random
 import time
-import matplotlib.pyplot as plt
+
 def linear_search(zoznam, hladane):
     pozícia= []
     počet= 0
@@ -90,19 +90,29 @@ def meraj_cas(funkcia, *args):
     funkcia(*args)
     end = time.time()
     return end - start
+
 def main():
     velkosti = [100, 500, 1000, 5000, 10000]
     cas_linear = []
     cas_binary = []
 
     for n in velkosti:
-        zoznam = generuj_sekvenciu(n)
-        zoznam_sorted = sorted(zoznam)
-        hladane = zoznam[n // 2]  # náhodný prvok zo stredu
-        t_linear = meraj_cas(linear_search, zoznam, hladane)
-        cas_linear.append(t_linear)
+        subor = generuj_sekvenciu(n)
+        subor_sorted = sorted(subor)
+        hladane = subor[n // 2]
 
-        # meranie binary search
-        t_binary = meraj_cas(binary_search, zoznam_sorted, hladane)
+        # linear search
+        t_linear = meraj_cas(linear_search, subor, hladane)
+        cas_linear.append(t_linear)
+        print(f"Linear search, n={n}: {t_linear:.6f} s")
+
+        # binary search
+        t_binary = meraj_cas(binary_search, subor_sorted, hladane)
         cas_binary.append(t_binary)
+        print(f"Binary search, n={n}: {t_binary:.6f} s")
+
+
+if __name__ == "__main__":
+    main()
+
 
