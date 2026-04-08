@@ -52,3 +52,57 @@ def main():
 
 if __name__ == "__main__":
     main()
+import random
+import time
+import matplotlib.pyplot as plt
+def linear_search(zoznam, hladane):
+    pozícia= []
+    počet= 0
+    i= 0
+    while i < len(zoznam):
+        if zoznam[i]==hladane:
+            pozícia.append(i)
+            počet +=1
+        i +=1
+    return {
+        "positions":pozícia,
+        "count":počet
+    }
+
+def binary_search(list,chcené):
+    lavy=0
+    pravy=len(list)
+    while lavy <= pravy:
+        stred=(lavy+pravy)//2
+
+        if list[stred]==chcené:
+            return stred
+        elif list[stred] < chcené:
+            lavy=stred+1
+        else:
+            pravy=stred-1
+    return None
+def generuj_sekvenciu(dlzka, max_hodnota=1000):
+    """Vytvorí zoznam náhodných celých čísel danej dĺžky."""
+    return [random.randint(0, max_hodnota) for _ in range(dlzka)]
+def meraj_cas(funkcia, *args):
+    start = time.time()
+    funkcia(*args)
+    end = time.time()
+    return end - start
+def main():
+    velkosti = [100, 500, 1000, 5000, 10000]
+    cas_linear = []
+    cas_binary = []
+
+    for n in velkosti:
+        zoznam = generuj_sekvenciu(n)
+        zoznam_sorted = sorted(zoznam)
+        hladane = zoznam[n // 2]  # náhodný prvok zo stredu
+        t_linear = meraj_cas(linear_search, zoznam, hladane)
+        cas_linear.append(t_linear)
+
+        # meranie binary search
+        t_binary = meraj_cas(binary_search, zoznam_sorted, hladane)
+        cas_binary.append(t_binary)
+
