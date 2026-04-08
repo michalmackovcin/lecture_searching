@@ -53,6 +53,32 @@ def main():
 if __name__ == "__main__":
     main()
 
-def linear_search(file_name, pole):
+def linear_search(zoznam, hladane):
+    pozícia= []
+    počet= 0
+    i= 0
+    while i < len(zoznam):
+        if zoznam[i]==hladane:
+            pozícia.append(i)
+            počet +=1
+        i +=1
+    return {
+        "positions":pozícia,
+        "count":počet
+    }
+def main():
+    # načítanie dát zo súboru
+    sequential_data = read_data("sequential.json", "unordered_numbers")
+
+    hladane_cislo = 5
+    vysledok = linear_search(sequential_data, hladane_cislo)
+
+    print("Pozícia hľadaného čísla:", vysledok["positions"])
+    print("Počet výskytov:", vysledok["count"])
+if __name__ == "__main__":
+    main()
+
+
+
 
 
